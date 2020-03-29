@@ -1,0 +1,89 @@
+body {
+    background-color: #f6f6f6;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: #FFFFFF;
+    height: 70px;
+}
+
+nav h3 {
+    line-height: 70px;
+    padding: 0 20px;
+    vertical-align: center;
+}
+
+nav h3 a:hover {
+    color: #87bff2;
+}
+
+section {
+    margin: 20px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+form p {
+    padding: 10px 0;
+}
+
+h1 {
+    padding: 20px 0 40px 0;
+    font-size: 30px;
+    color: #87bff2;
+}
+
+input, textarea {
+    padding: 5px;
+    margin: 0.5em 0;
+    width: 40%;
+    border: #56707f solid 1px;
+    border-radius: 3px;
+}
+textarea {
+    height: 20em;
+    width: 100%;
+}
+select {
+    border: #56707f solid 1px;
+    margin: 5px;
+    width: 100px;
+    text-align: center;
+    text-align-last: center;
+}
+
+
+input[type="checkbox"], input[type="radio"] {
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+    margin: 5px 0;
+}
+
+.check {
+    line-height: 1.3rem;
+}
+
+input[type="button"]  {
+    border: #171a21 solid 1px;
+    width: 4em;
+}
+
+/*input[type="button"],input[type="submit"],input[type="checkbox"], input[type="radio"], select:hover {*/
+/*    cursor: pointer;*/
+/*}*/
+
+
+
+.final {
+    border: none;
+    background-color: #87bff2;
+    color: #FFFFFF;
+    width: 120px;
+    height: 40px;
+    font-size: 1.1rem;
+
+}
