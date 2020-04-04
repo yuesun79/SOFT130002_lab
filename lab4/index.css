@@ -1,0 +1,80 @@
+/*调整各个控件大小、边距 调整边距*/
+
+.container {
+    width: 100%;
+    padding: 0;
+}
+a#logo {
+    padding: 0;
+}
+#logo img {
+    width: 50px;
+    height: 50px;
+}
+#myCarousel {
+    margin: 20px 0;
+}
+.row {
+    padding: 0 30px;
+    margin: 0;
+}
+
+/*图片响应式*/
+
+figure{
+    box-shadow: gray 0 0 10px;
+    width: auto;
+    height: 20vw;
+    font-size: 14px;
+}
+@media (max-width: 992px) and (min-width: 768px){
+    figure {
+        height: 40vw;
+    }
+}
+@media (max-width: 768px) {
+    figure {
+        height: 90vw;
+    }
+}
+figure img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/*图片注释*/
+
+.figcaption{
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 0 0 10px 10px;
+    width: auto;
+    height: 70px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+.figcaption p {
+    line-height: 1.4rem;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/
+}
+
+/*注脚*/
+
+footer {
+    padding-top: 30px;
+    background-color: #141414;
+    color: grey;
+}
+footer img {
+    margin: 0 15px;
+    width: 30px;
+    height: 30px;
+}
+footer img:hover {
+    border: black 2px solid;
+}
