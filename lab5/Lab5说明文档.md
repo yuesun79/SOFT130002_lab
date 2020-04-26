@@ -98,11 +98,11 @@ function  arrSameStr() {
 
 github截屏：
 
-![github截屏](images/github.png)
+![github截屏](https://tva1.sinaimg.cn/large/007S8ZIlly1ge6wos3z2vj31c00u0qhg.jpg)
 
 lab5网页截屏：
 
-![lab截屏](images/lab5_pic.png)
+![lab截屏](https://tva1.sinaimg.cn/large/007S8ZIlly1ge6wovwdtwj31of0u0djn.jpg)
 
 
 
