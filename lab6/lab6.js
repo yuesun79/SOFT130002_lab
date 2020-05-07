@@ -9,11 +9,39 @@
     ①要求使用JS闭包的方式使得计数实现局部私有，不可以在全局区域声明计数变量。
     ②使用console.log打印计数即可，到达一分钟提前停止也需要console.log相应的提示语句。
 */
+let counter = function(){
+    let count = 0;
+    return {
+        continue:function () {
+            return count ++;
+        },
+        getCount:function () {
+            return count
+        }
+    }
+}();
 
 function testTime(){
+    let num = 1;
+    console.log(num);
+    return function() {
+        let int = setInterval(function () {
+            let seconds = new Date().getSeconds();
+            if (counter.getCount() === 10) {
+                clearInterval(int);
+                console.log("已经十次了")
+            }
+            else if (seconds < 5)
+                clearInterval(int);
+            else {
+                num *= 2;
+                console.log(num);
+                counter.continue();
+            }
 
+        }, 5000)
+    }
 }
-// testTime();
 
 /*
 2.
@@ -23,9 +51,15 @@ function testTime(){
     ③邮箱字符串的正则匹配的理解需写入lab文档。
     ④telephone与mail均是字符串。
 */
-function testMail(telephone,mail) {
 
+function testMail(telephone,mail) {
+    let reTel = /^1[3456789]\d{9}$/;
+    let reMail = /^[a-z]([a-z0-9]*[-_.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+.[a-z]{2,3}([.][a-z]{2})?$/i;
+    let boolTel = reTel.test(telephone)?'right':'wrong';
+    let boolMail = reMail.test(mail)?'right':'wrong';
+    console.log("The telephone is " + boolTel + " and the mail is " + boolMail + "!");
 }
+
 
 /*
 3.
@@ -37,7 +71,16 @@ function testMail(telephone,mail) {
     ⑤str为字符串。
 */
 function testRedundancy(str) {
-
+    let strArray = str.split(' ');
+    let set = new Set();
+    let re,thisWord;
+    for (let i = 0; i < strArray.length-1; i++) {
+        if ((re.test(strArray[i+1])))
+            set.add(strArray[i] + " " + strArray[i+1]);
+        if (set.size === 10)
+            break;
+    }
+    return set;
 }
 
 
@@ -56,8 +99,14 @@ function testRedundancy(str) {
     ①注意联系生活，并注意观察我给的上述例子。
 */
 function testKeyBoard(wantInput, actualInput) {
-
+    let set = new Set(actualInput.toUpperCase());
+    for (let i = 0; i < wantInput.length; i++) {
+        if (set.has(wantInput.toUpperCase().charAt(i)))
+            set.delete(wantInput.toUpperCase().charAt(i))
+    }
+    return set;
 }
+
 
 /*
 5.
@@ -72,7 +121,14 @@ function testKeyBoard(wantInput, actualInput) {
     ⑤str为字符串。
 */
 function testSpecialReverse(str) {
+    let strArray = str.split(/\s+/g);
+    let reverse = "";
+    for (let i = strArray.length - 2; i > 0; i--)
+        reverse += strArray[i] + ' ' ;
+    return reverse;
 }
+
+
 
 /*
 6.
@@ -90,7 +146,17 @@ function testSpecialReverse(str) {
 */
 
 function twoSum(nums, target) {
+    let map = new Map();
+    for (let i = 0; i < nums.length; i++){
+        let minus = target - nums[i];
+        if (map.has(nums[i]))
+            console.log([map.get(nums[i]),i]);
+        else
+            map.set(minus,i);
+    }
 }
+
+
 
 
 /*
@@ -99,13 +165,20 @@ function twoSum(nums, target) {
     打印最长的包含不同字符串的子字符串长度。
 要求：
     ①使用Map。
-    ②例如：输入"abbbbb",输出1，输入"bbbbb",输出2；
+    ②例如：输入"abbbbb",输出2，输入"bbbbb",输出1；
     ③只能显式使用一次循环。
     ④使用console.log打印即可。
     ⑤str为字符串。
 */
 function lengthOfLongestSubstring(str) {
+    let map = new Map();
+    for (let i = 0; i < str.length; i++){
+        if (!map.has(str.charAt(i)))
+            map.set(str.charAt(i),i);
+    }
+    return map.size;
 }
+
 
 /*
 8.
@@ -119,3 +192,53 @@ function lengthOfLongestSubstring(str) {
 function Country() {
     this.name = "国家";
 }
+
+function DevelopingCountry() {
+    Country.call(this);
+    this.sayHi = function() {
+        return "Hi,i am a developing country.";
+    }
+}
+
+function PoorCountry() {}
+PoorCountry.prototype = new Country();
+PoorCountry.prototype.saySad = function () {
+    return "I am a sad poor country.";
+};
+
+function creatDevelopedCountry(country) {
+    let o = Object.create(country);
+    o.sayHappy = function () {
+        return "I am a Happy developed country.";
+    };
+    return o;
+}
+
+let country = new Country();
+let developing = new DevelopingCountry();
+let poor = new PoorCountry();
+let developed = creatDevelopedCountry(country);
+
+function test(){
+    //2
+    testMail(19946233719,"a1233@fudan.cn");
+    //3
+    console.log(testRedundancy('Is is that for me me Me'));
+    //4
+    console.log(testKeyBoard('_hs_s_a_es','7_This_is_a_test'));
+    //5
+    console.log(testSpecialReverse("  win   is such an angel!  "));
+    //6
+    twoSum([1,2,3,4],5);
+    //7
+    console.log(lengthOfLongestSubstring('abrebbbb'));
+    //8
+    console.log(developing.sayHi());
+    console.log(poor.saySad());
+    console.log(developed.sayHappy());
+    //1
+    let run = testTime()();
+}
+
+test();
+
