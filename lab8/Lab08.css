@@ -19,6 +19,7 @@ a{
     height: 400px;
     z-index: 1;
 }
+/*z-index 属性设置元素的堆叠顺序。拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面。Z-index 仅能在定位元素上奏效*/
 .container .wrap img {
     float: left;
     width: 600px;
@@ -50,7 +51,7 @@ a{
     position: absolute;
     top: 35%;
     color: green;
-    padding:0px 14px;
+    padding:0 14px;
     border-radius: 50%;
     font-size: 50px;
     z-index: 2;
@@ -67,4 +68,30 @@ a{
 }
 .container .arrow:hover {
     background-color: rgba(0,0,0,0.2);
+}
+html {
+    background-color: white;
+    text-align: center;
+}
+body {
+    background-color: aliceblue;
+    width: 750px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+}
+table {
+    width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 0 5px grey;
+    border-radius: 10px;
+    table-layout: fixed;
+}
+td {
+    font-weight: bold;
+    text-align: left;
+
+}
+h3 {
+    text-align: center;
+    padding-top: 30px;
 }

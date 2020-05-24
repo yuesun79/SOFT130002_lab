@@ -3,6 +3,14 @@
 /********************************************begin************************************/
 
 /*Global Variable Area */
+let disArray = ["0px","-600px","-1200px","-1800px","-2400px","-3000px","-3600px"];
+let wrap = document.getElementsByClassName("wrap")[0];
+let container = document.getElementsByClassName("container")[0];
+let images = document.querySelectorAll(".wrap img");
+let leftArrow = document.getElementsByClassName("arrow_left")[0];
+let rightArrow = document.getElementsByClassName("arrow_right")[0];
+let spans = document.getElementsByClassName("buttons")[0].children;
+
 
 /*********************************************end*************************************/
 
@@ -24,6 +32,59 @@
 
 /*Code Here*/
 
+//距离对应属性，属性对应按钮
+
+leftArrow.addEventListener("click",prevPic,false);
+rightArrow.addEventListener("click",nextPic,false);
+//当前img的顺序数值，0到6的数
+function thisCenter() {
+    for (let i = 0; i < disArray.length; i++) {
+        if (wrap.style.left === disArray[i])
+            return i;
+    }
+}
+//当img顺序数值超过范围时改变他们，以继续循环
+function checkCenter(num) {
+ if (num === -1)
+     return 4;
+ else if (num === 7)
+     return 2;
+ else
+     return num;
+}
+//清楚所有span的class name，即取消红色底色
+function clearSpans() {
+    for (let j = 0; j < spans.length; j++)
+        spans[j].className = "";
+}
+//将img顺序数值与span对应
+function matchSpan(num) {
+    let spanNum;
+    switch (num) {
+        case 0:spanNum = 4;break;
+        case 1:spanNum = 0;break;
+        case 2:spanNum = 1;break;
+        case 3:spanNum = 2;break;
+        case 4:spanNum = 3;break;
+        case 5:spanNum = 4;break;
+        case 6:spanNum = 0;break;
+    }
+    return spanNum;
+}
+//函数
+function prevPic() {
+    let nextCenter = checkCenter(thisCenter() - 1);
+    wrap.style.left = disArray[nextCenter];
+    clearSpans();
+    spans[matchSpan(nextCenter)].className = "on";
+}
+//函数
+function nextPic() {
+    let nextCenter = checkCenter(thisCenter() + 1);
+    wrap.style.left = disArray[nextCenter];
+    clearSpans();
+    spans[matchSpan(nextCenter)].className = "on";
+}
 /*********************************************end*************************************/
 
 
@@ -40,6 +101,18 @@
 /********************************************begin************************************/
 
 /*Code Here*/
+function startRoll() {
+    let count = window.setInterval(nextPic,2000);
+    container.addEventListener("mouseover", function (){
+            clearInterval(count)
+        }
+        ,false);
+}
+
+window.addEventListener("load",startRoll,false);
+container.addEventListener("mouseout", startRoll, false);
+
+
 
 /*********************************************end*************************************/
 
@@ -55,7 +128,15 @@
 /********************************************begin************************************/
 
 /*Code Here*/
+for (let i = 0; i < spans.length; i++) {
+    spans[i].addEventListener("click",clickBtn,false);
+    function clickBtn() {
+        clearSpans();
+        spans[i].className = "on";
+        wrap.style.left = -600 * (i + 1) + "px";
 
+    }
+}
 /*********************************************end*************************************/
 
 
@@ -69,5 +150,21 @@
 /********************************************begin************************************/
 
 /*Code Here*/
+$(function(){
+//定义方法
+    $('table td').click(function(){
+        //定义点击事件
+        if(!$(this).is('.input')){
+            //如果当前不是.input类
+            $(this).addClass('input').html('<input type="text" value="'+ $(this).text() +'" />');
+            $(this).find('input').css({"outline":"none","height":"18px","width":"190px","font-weight":"bold","font-size":"16px"});
+            $(this).find('input').focus().blur(function(){
+                //当前添加类获得元素新插入一个input通过遍历获得input定义伪类，当失去焦点以后在定义一个方法
+                $(this).parent().removeClass('input').html($(this).val() || "");
+                //当前查找每个元素，删除掉input类获得input所有元素的值并且和0
+            });
+        }
+    })
+});
 
 /*********************************************end*************************************/
